@@ -27,7 +27,7 @@ class TableclientResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('status')
-                    ->required(),
+                    ->default('unpaid'),
             ]);
     }
 
@@ -35,9 +35,12 @@ class TableclientResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('order.status')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

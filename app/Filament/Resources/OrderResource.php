@@ -29,8 +29,17 @@ class OrderResource extends Resource
                 Forms\Components\Select::make('item_id')
                     ->relationship('items', 'name')
                     ->multiple(),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
+                    // ['pending', 'processing', 'completed']
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'processing' => 'Processing',
+                        'completed' => 'Completed',
+                    ])
+                    ->default('pending'),
+                Forms\Components\TextInput::make('quantity')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 

@@ -45,6 +45,8 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('menu_id')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('menu.name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
