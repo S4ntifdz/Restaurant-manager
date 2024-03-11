@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Filters\OrderFilter;
+use App\Http\Resources\OrderCollection;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filter = new OrderFilter();
+        $queryItems = $filter->transform($request);
+        $orders = Order::where($queryItems);
+        return new OrderCollection($orders->paginate()->appends($request->query()));
     }
 
     /**
